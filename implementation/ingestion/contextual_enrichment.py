@@ -36,7 +36,12 @@ class ContextualEnricher:
             model: LLM model to use for context generation
         """
         self.model = model
-        self.client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        # Configurar cliente com base_url se especificado
+        client_kwargs = {'api_key': os.getenv("OPENAI_API_KEY")}
+        base_url = os.getenv('OPENAI_BASE_URL')
+        if base_url:
+            client_kwargs['base_url'] = base_url
+        self.client = AsyncOpenAI(**client_kwargs)
 
     async def enrich_chunk(
         self,

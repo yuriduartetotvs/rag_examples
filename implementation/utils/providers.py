@@ -22,11 +22,17 @@ def obter_modelo_llm() -> OpenAIModel:
     """
     escolha_llm = os.getenv('LLM_CHOICE', 'gpt-4o-mini')
     chave_api = os.getenv('OPENAI_API_KEY')
+    base_url = os.getenv('OPENAI_BASE_URL')
     
     if not chave_api:
         raise ValueError("Variável de ambiente OPENAI_API_KEY é obrigatória")
     
-    return OpenAIModel(escolha_llm, provider=OpenAIProvider(api_key=chave_api))
+    # Criar provedor com base_url se especificado
+    provider_kwargs = {'api_key': chave_api}
+    if base_url:
+        provider_kwargs['base_url'] = base_url
+    
+    return OpenAIModel(escolha_llm, provider=OpenAIProvider(**provider_kwargs))
 
 
 def obter_cliente_embedding() -> openai.AsyncOpenAI:
@@ -37,11 +43,17 @@ def obter_cliente_embedding() -> openai.AsyncOpenAI:
         Cliente OpenAI configurado para embeddings
     """
     chave_api = os.getenv('OPENAI_API_KEY')
+    base_url = os.getenv('OPENAI_BASE_URL')
     
     if not chave_api:
         raise ValueError("Variável de ambiente OPENAI_API_KEY é obrigatória")
     
-    return openai.AsyncOpenAI(api_key=chave_api)
+    # Criar cliente com base_url se especificado
+    client_kwargs = {'api_key': chave_api}
+    if base_url:
+        client_kwargs['base_url'] = base_url
+    
+    return openai.AsyncOpenAI(**client_kwargs)
 
 
 def obter_modelo_embedding() -> str:
