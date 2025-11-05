@@ -113,3 +113,8 @@ def obter_info_modelo() -> dict:
         "provedor_embedding": "openai",
         "modelo_embedding": obter_modelo_embedding(),
     }
+
+
+# Aliases para compatibilidade com embedder.py
+get_embedding_client = obter_cliente_embedding
+get_embedding_model = obter_modelo_embedding

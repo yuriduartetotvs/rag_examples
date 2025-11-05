@@ -215,3 +215,8 @@ async def testar_conexao() -> bool:
     except Exception as e:
         logger.error(f"Teste de conexão com banco de dados falhou: {e}")
         return False
+
+
+# Aliases para compatibilidade com ingest.py
+initialize_database = inicializar_banco_dados
+close_database = fechar_banco_dados

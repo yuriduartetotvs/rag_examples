@@ -197,3 +197,8 @@ class ResultadoIngestao(BaseModel):
     errors: List[str] = Field(default_factory=list)
     entities_extracted: int = 0  # Para compatibilidade
     relationships_created: int = 0  # Para compatibilidade
+
+
+# Aliases para compatibilidade com ingest.py
+IngestionConfig = ConfiguracaoIngestao
+IngestionResult = ResultadoIngestao
