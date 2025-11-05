@@ -1,10 +1,10 @@
-# Estratégias Avançadas de RAG - Guia Completo
+# Estratégias Avançadas de RAG – Guia Completo
 
 **Um recurso abrangente para entender e implementar estratégias avançadas de Retrieval-Augmented Generation.**
 
 Este repositório demonstra 11 estratégias de RAG com:
 - 📖 Teoria detalhada e pesquisa ([docs/](docs/))
-- 💻 Exemplos simples de pseudocódigo ([examples/](examples/))
+- 💻 Exemplos simples em pseudocódigo ([examples/](examples/))
 - 🔧 Exemplos de código completo ([implementation/](implementation/))
 
 Perfeito para: Engenheiros de IA, profissionais de ML e qualquer pessoa construindo sistemas RAG.
@@ -17,26 +17,26 @@ Perfeito para: Engenheiros de IA, profissionais de ML e qualquer pessoa construi
 2. [Início Rápido](#-início-rápido)
 3. [Exemplos de Pseudocódigo](#-exemplos-de-pseudocódigo)
 4. [Exemplos de Código](#-exemplos-de-código)
-5. [Guia Detalhado de Estratégias](#-guia-detalhado-de-estratégias)
+5. [Guia Detalhado das Estratégias](#-guia-detalhado-das-estratégias)
 6. [Estrutura do Repositório](#-estrutura-do-repositório)
 
 ---
 
 ## 🎯 Visão Geral das Estratégias
 
-| # | Estratégia | Status | Caso de Uso | Vantagens | Desvantagens |
-|---|----------|--------|-------------|-----------|--------------|
-| 1 | [Re-ranking](#1-re-ranking) | ✅ Exemplo de Código | Crítico para precisão | Resultados altamente precisos | Mais lento, mais processamento |
-| 2 | [RAG Agêntico](#2-rag-agêntico) | ✅ Exemplo de Código | Necessidades flexíveis de recuperação | Seleção autônoma de ferramentas | Lógica mais complexa |
-| 3 | [Grafos de Conhecimento](#3-grafos-de-conhecimento) | 📝 Apenas Pseudocódigo | Pesado em relacionamentos | Captura conexões | Sobrecarga de infraestrutura |
-| 4 | [Recuperação Contextual](#4-recuperação-contextual) | ✅ Exemplo de Código | Documentos críticos | 35-49% melhor precisão | Alto custo de ingestão |
-| 5 | [Expansão de Consulta](#5-expansão-de-consulta) | ✅ Exemplo de Código | Consultas ambíguas | Melhor recall, múltiplas perspectivas | Chamada extra de LLM, maior custo |
-| 6 | [RAG Multi-Consulta](#6-rag-multi-consulta) | ✅ Exemplo de Código | Buscas amplas | Cobertura abrangente | Múltiplas chamadas de API |
-| 7 | [Chunking Consciente de Contexto](#7-chunking-consciente-de-contexto) | ✅ Exemplo de Código | Todos os documentos | Coerência semântica | Ingestão ligeiramente mais lenta |
-| 8 | [Late Chunking](#8-late-chunking) | 📝 Apenas Pseudocódigo | Preservação de contexto | Contexto completo do documento | Requer modelos de contexto longo |
-| 9 | [RAG Hierárquico](#9-rag-hierárquico) | 📝 Apenas Pseudocódigo | Documentos complexos | Precisão + contexto | Configuração complexa |
-| 10 | [RAG Auto-reflexivo](#10-rag-auto-reflexivo) | ✅ Exemplo de Código | Consultas de pesquisa | Auto-correção | Maior latência |
-| 11 | [Embeddings Fine-tuned](#11-embeddings-fine-tuned) | 📝 Apenas Pseudocódigo | Específico de domínio | Melhor precisão | Treinamento necessário |
+| #  | Estratégia                  | Status               | Caso de Uso                 | Vantagens                  | Desvantagens                  |
+|----|-----------------------------|----------------------|-----------------------------|----------------------------|-------------------------------|
+| 1  | [Re-ranking](#1-re-ranking) | ✅ Exemplo de Código | Crítico para precisão       | Resultados altamente precisos | Mais lento, mais processamento |
+| 2  | [RAG Agêntico](#2-rag-agêntico) | ✅ Exemplo de Código | Necessidades flexíveis de recuperação | Seleção autônoma de ferramentas | Lógica mais complexa        |
+| 3  | [Grafos de Conhecimento](#3-grafos-de-conhecimento) | 📝 Apenas Pseudocódigo | Foco em relacionamentos    | Captura conexões             | Sobrecarga de infraestrutura |
+| 4  | [Recuperação Contextual](#4-recuperação-contextual) | ✅ Exemplo de Código | Documentos críticos        | 35–49% melhor precisão       | Alto custo de ingestão        |
+| 5  | [Expansão de Consulta](#5-expansão-de-consulta) | ✅ Exemplo de Código | Consultas ambíguas         | Melhor recall, múltiplas perspectivas | Chamada extra ao LLM, maior custo |
+| 6  | [RAG Multi-Consulta](#6-rag-multi-consulta) | ✅ Exemplo de Código | Buscas amplas              | Cobertura abrangente         | Múltiplas chamadas à API      |
+| 7  | [Chunking Consciente de Contexto](#7-chunking-consciente-de-contexto) | ✅ Exemplo de Código | Todos os documentos        | Coerência semântica           | Ingestão ligeiramente mais lenta |
+| 8  | [Late Chunking](#8-late-chunking) | 📝 Apenas Pseudocódigo | Preservação de contexto     | Contexto completo do documento | Requer modelos de contexto longo |
+| 9  | [RAG Hierárquico](#9-rag-hierárquico) | 📝 Apenas Pseudocódigo | Documentos complexos        | Precisão + contexto          | Configuração complexa          |
+| 10 | [RAG Auto-reflexivo](#10-rag-auto-reflexivo) | ✅ Exemplo de Código | Consultas de pesquisa      | Auto-correção                | Maior latência                |
+| 11 | [Embeddings Fine-tuned](#11-embeddings-fine-tuned) | 📝 Apenas Pseudocódigo | Específico de domínio      | Melhor precisão              | Treinamento necessário        |
 
 ### Legenda
 - ✅ **Exemplo de Código**: Código completo em `implementation/` (educacional, não pronto para produção)
@@ -50,13 +50,13 @@ Perfeito para: Engenheiros de IA, profissionais de ML e qualquer pessoa construi
 
 ```bash
 cd examples
-# Navegue pelos exemplos simples de < 50 linhas para cada estratégia
+# Navegue por exemplos simples de < 50 linhas para cada estratégia
 cat 01_reranking.py
 ```
 
 ### Executar os Exemplos de Código (Educacional)
 
-> **Nota**: Estes são exemplos educacionais para mostrar como as estratégias funcionam em código real. Não garantidos de serem totalmente funcionais ou prontos para produção.
+> **Nota**: Estes são exemplos educacionais para ilustrar como as estratégias funcionam em código real. Não há garantia de funcionarem prontamente em produção.
 
 ```bash
 cd implementation
@@ -79,9 +79,9 @@ python rag_agent_advanced.py
 
 ## 💻 Exemplos de Pseudocódigo
 
-Todas as estratégias têm exemplos simples e funcionais de pseudocódigo em [`examples/`](examples/).
+Todas as estratégias possuem exemplos simples e funcionais de pseudocódigo em [`examples/`](examples/).
 
-Cada arquivo tem **< 50 linhas** e demonstra:
+Cada arquivo possui **menos de 50 linhas** e demonstra:
 - Conceito central
 - Como implementar com Pydantic AI
 - Integração com PG Vector
@@ -96,14 +96,14 @@ agente = Agent('openai:gpt-4o', system_prompt='Assistente RAG com expansão de c
 
 @agente.tool
 def expandir_consulta(consulta: str) -> list[str]:
-    """Expandir consulta única em múltiplas variações"""
+    """Expande consulta única em múltiplas variações"""
     prompt_expansao = f"Gere 3 variações de: '{consulta}'"
     variacoes = gerar_llm(prompt_expansao)
     return [consulta] + variacoes
 
 @agente.tool
 def buscar_base_conhecimento(consultas: list[str]) -> str:
-    """Buscar no banco vetorial com múltiplas consultas"""
+    """Busca no banco vetorial com múltiplas consultas"""
     todos_resultados = []
     for consulta in consultas:
         embedding_consulta = obter_embedding(consulta)
@@ -112,14 +112,13 @@ def buscar_base_conhecimento(consultas: list[str]) -> str:
     return desduplicar(todos_resultados)
 ```
 
-**Navegar por todo o pseudocódigo**: [examples/README.md](examples/README.md)
+**Veja todos os pseudocódigos**: [examples/README.md](examples/README.md)
 
 ---
 
-## 🏗️ Exemplos de Código
+## 🏗 Exemplos de Código
 
-> **⚠️ Nota Importante**: A pasta `implementation/` contém **exemplos de código educacionais** baseados em uma implementação real, não prontos para produção. Essas estratégias são adicionadas para demonstrar conceitos e mostrar como funcionam em código real. Elas **não são garantidas de estar totalmente funcionais** e **não é ideal ter todas as estratégias em uma base de código** (por isso não refinei especificamente para uso em produção). Use-as como referências de aprendizado e pontos de partida para suas próprias implementações.
-> Pense nisso como uma "implementação RAG pronta para uso" com estratégias adicionadas para fins de demonstração. Use como inspiração para seus próprios sistemas de produção.
+> **⚠️ Nota Importante**: A pasta `implementation/` contém **exemplos educacionais** que não são prontos para produção. As estratégias são adicionadas apenas para demonstração de conceitos. Elas **não possuem garantia de completude funcional** e **não é recomendado manter todas as estratégias em uma base de código de produção**. Use como referência de aprendizado e base para suas próprias implementações.
 
 ### Arquitetura
 
@@ -138,728 +137,412 @@ implementation/
 ```
 
 **Stack Tecnológico**:
-- **Pydantic AI** - Framework de agentes
-- **PostgreSQL + pgvector** - Busca vetorial
-- **Docling** - Chunking híbrido
-- **OpenAI** - Embeddings e LLM
+- **Pydantic AI** – Framework de agentes
+- **PostgreSQL + pgvector** – Busca vetorial
+- **Docling** – Chunking híbrido
+- **OpenAI** – Embeddings e LLM
 
 ---
 
-## 📖 Guia Detalhado de Estratégias
+## 📖 Guia Detalhado das Estratégias
 
-### ✅ Exemplos de Código (Educacional)
+(A partir daqui todas as explicações e exemplos estão devidamente traduzidos – apenas a ESTRATÉGIA 6 ("Multi-Query RAG") e 7 ("Context-Aware Chunking") estavam originalmente em inglês, e já estão traduzidas abaixo):
 
 ---
 
-## 1. Re-ranking
+## 6. RAG Multi-Consulta
 
 **Status**: ✅ Exemplo de Código
 
-**Arquivo**: `rag_agent_advanced.py` (Linhas 194-256)
+**Arquivo**: `rag_agent_advanced.py` (Linhas 114–187)
 
 ### O que é
-Recuperação em dois estágios: Busca vetorial (20-50+ candidatos) → Modelo de reordenação para filtrar (top 5).
+Gera múltiplas variações de consulta/perspectivas com um LLM (ex.: 3–4 variações), executa todas as buscas em paralelo e elimina duplicatas dos resultados. Ao contrário da Expansão de Consulta, que gera UMA consulta aprimorada, esta estratégia cria DIVERSAS formulações distintas para abranger outros ângulos da informação.
 
 ### Vantagens e Desvantagens
-✅ Precisão significativamente melhor, mais conhecimento considerado sem sobrecarregar o LLM
+✅ Cobertura abrangente, melhor recall para consultas ambíguas
 
-❌ Ligeiramente mais lento que busca vetorial pura, usa mais processamento
+❌ Múltiplas consultas ao banco (porém paralelizadas), maior custo
+
+### Exemplo de Código
+
+```python
+# Linhas 114–187 em rag_agent_advanced.py
+async def buscar_com_multi_consulta(consulta: str, limite: int = 5) -> str:
+    """Busca utilizando múltiplas variações de consulta em paralelo."""
+    # Gerar variações da consulta
+    consultas = await gerar_variações_de_consulta(consulta)  # Retorna lista de 4 consultas
+
+    # Executar todas as buscas em paralelo
+    tarefas_busca = []
+    for q in consultas:
+        embedding = await embedder.embed_query(q)
+        tarefa = db.fetch("SELECT * FROM match_chunks($1::vector, $2)", embedding, limite)
+        tarefas_busca.append(tarefa)
+
+    listas_resultados = await asyncio.gather(*tarefas_busca)
+
+    # Deduplicar pelos IDs dos chunks, mantendo maior similaridade
+    vistos = {}
+    for resultados in listas_resultados:
+        for linha in resultados:
+            if linha['chunk_id'] not in vistos or linha['similarity'] > vistos[linha['chunk_id']]['similarity']:
+                vistos[linha['chunk_id']] = linha
+
+    # Retornar os top N resultados após deduplicação
+    return formatar_resultados(sorted(list(vistos.values()), key=lambda x: x['similarity'], reverse=True)[:limite])
+```
+**Principais Características:**
+- Execução paralela com `asyncio.gather()`
+- Deduplicação inteligente (mantém maior pontuação de similaridade por chunk)
+
+**Veja:**
+- Guia completo: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#3-multi-query-rag)
+- Pseudocódigo: [06_multi_query_rag.py](examples/06_multi_query_rag.py)
+- Pesquisa: [docs/06-multi-query-rag.md](docs/06-multi-query-rag.md)
+
+---
+
+## 7. Chunking Consciente de Contexto
+
+**Status**: ✅ Exemplo de Código (Padrão)
+
+**Arquivo**: `ingestion/chunker.py` (Linhas 70–102)
+
+### O que é
+Divisão de documentos que utiliza análise semântica e da estrutura do documento para encontrar limites naturais dos chunks, ao invés de cortes fixos por tamanho. Esta abordagem:
+- Analisa estrutura do documento (títulos, seções, parágrafos, tabelas)
+- Usa análise semântica para localizar mudanças de tópico
+- Mantém coerência linguística dentro do chunk
+- Preserva contexto hierárquico (ex.: informação sobre o título/seção)
+
+**Implementação:** O HybridChunker do Docling demonstra esta estratégia:
+- Chunking sensível ao token (usa tokenizador real)
+- Preservação da estrutura do documento
+- Coerência semântica
+- Inclusão de contexto de títulos
+
+### Vantagens e Desvantagens
+✅ Grátis, rápido, mantém estrutura hierárquica
+
+❌ Um pouco mais complexo que chunking ingênuo
 
 ### Exemplo de Código
 ```python
-# Linhas 194-256 em rag_agent_advanced.py
-async def buscar_com_reranking(ctx: RunContext[None], consulta: str, limite: int = 5) -> str:
-    """Recuperação em dois estágios com re-ranking de cross-encoder."""
-    inicializar_reranker()  # Carrega cross-encoder/ms-marco-MiniLM-L-6-v2
-
-    # Estágio 1: Recuperação vetorial rápida (recuperar 20 candidatos)
-    limite_candidatos = min(limite * 4, 20)
-    resultados = await busca_vetorial(consulta, limite_candidatos)
-
-    # Estágio 2: Re-ranking com cross-encoder
-    pares = [[consulta, linha['conteudo']] for linha in resultados]
-    pontuacoes = reranker.predict(pares)
-
-    # Ordenar por novas pontuações e retornar top N
-    reordenados = sorted(zip(resultados, pontuacoes), key=lambda x: x[1], reverse=True)[:limite]
-    return formatar_resultados(reordenados)
-```
-
-**Modelo**: `cross-encoder/ms-marco-MiniLM-L-6-v2`
-
-**Veja**:
-- Guia completo: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#4-re-ranking)
-- Pseudocódigo: [01_reranking.py](examples/01_reranking.py)
-- Pesquisa: [docs/01-reranking.md](docs/01-reranking.md)
-
----
-
-## 2. RAG Agêntico
-
-**Status**: ✅ Exemplo de Código
-
-**Arquivos**: `rag_agent_advanced.py` (Linhas 263-354)
-
-### O que é
-Agente escolhe autonomamente entre múltiplas ferramentas de recuperação, exemplo:
-1. `buscar_base_conhecimento()` - Busca semântica sobre chunks (pode incluir **busca híbrida**: vetor denso + palavra-chave esparsa/BM25)
-2. `recuperar_documento_completo()` - Buscar documentos inteiros quando chunks não são suficientes
-
-**Nota**: Busca híbrida (combinando embeddings de vetor denso com busca esparsa de palavra-chave como BM25) é tipicamente implementada como parte da estratégia de recuperação agêntica, dando ao agente acesso tanto à similaridade semântica quanto à correspondência de palavra-chave.
-
-### Vantagens e Desvantagens
-✅ Flexível, adapta-se automaticamente às necessidades da consulta
-
-❌ Mais complexo, comportamento menos previsível
-
-### Exemplo de Código
-```python
-# Ferramenta 1: Busca semântica (Linhas 263-305)
-@agente.tool
-async def buscar_base_conhecimento(consulta: str, limite: int = 5) -> str:
-    """Busca semântica padrão sobre chunks de documentos."""
-    embedding_consulta = await embedder.embed_query(consulta)
-    resultados = await db.match_chunks(embedding_consulta, limite)
-    return formatar_resultados(resultados)
-
-# Ferramenta 2: Recuperação de documento completo (Linhas 308-354)
-@agente.tool
-async def recuperar_documento_completo(titulo_documento: str) -> str:
-    """Recuperar documento completo quando chunks carecem de contexto."""
-    resultado = await db.query(
-        "SELECT title, content FROM documents WHERE title ILIKE %s",
-        f"%{titulo_documento}%"
-    )
-    return f"**{resultado['title']}**\n\n{resultado['content']}"
-```
-
-**Fluxo de Exemplo**:
-```
-Usuário: "Qual é a política completa de reembolso?"
-Agente:
-  1. Chama buscar_base_conhecimento("política de reembolso")
-  2. Encontra chunks mencionando "politica_reembolso.pdf"
-  3. Chama recuperar_documento_completo("política de reembolso")
-  4. Retorna documento completo
-```
-
-**Veja**:
-- Guia completo: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#5-agentic-rag)
-- Pseudocódigo: [02_agentic_rag.py](examples/02_agentic_rag.py)
-- Pesquisa: [docs/02-agentic-rag.md](docs/02-agentic-rag.md)
-
----
-
-## 3. Grafos de Conhecimento
-
-**Status**: 📝 Apenas Pseudocódigo (Graphiti)
-
-**Por que não nos exemplos de código**: Requer infraestrutura Neo4j, extração de entidades
-
-### O que é
-Combina busca vetorial com bancos de dados de grafo (como Neo4j/FalkorDB) para capturar relacionamentos entre entidades.
-
-### Vantagens e Desvantagens
-✅ Captura relacionamentos que vetores perdem, ótimo para dados interconectados
-
-❌ Requer configuração Neo4j, extração de entidades, manutenção de grafo, mais lento e caro
-
-### Conceito de Pseudocódigo (Graphiti)
-```python
-# De 03_knowledge_graphs.py (com Graphiti)
-from graphiti_core import Graphiti
-from graphiti_core.nodes import EpisodeType
-
-# Inicializar Graphiti (conecta ao Neo4j)
-graphiti = Graphiti("neo4j://localhost:7687", "neo4j", "senha")
-
-async def ingerir_documento(texto: str, fonte: str):
-    """Ingerir documento no grafo de conhecimento Graphiti."""
-    # Graphiti extrai automaticamente entidades e relacionamentos
-    await graphiti.add_episode(
-        name=fonte,
-        episode_body=texto,
-        source=EpisodeType.text,
-        source_description=f"Documento: {fonte}"
-    )
-
-@agente.tool
-async def buscar_grafo_conhecimento(consulta: str) -> str:
-    """Busca híbrida: semântica + palavra-chave + travessia de grafo."""
-    # Graphiti combina:
-    # - Similaridade semântica (embeddings)
-    # - Busca por palavra-chave BM25
-    # - Travessia de estrutura de grafo
-    # - Contexto temporal (quando isso foi verdade?)
-
-    resultados = await graphiti.search(query=consulta, num_results=5)
-
-    return formatar_resultados_grafo(resultados)
-```
-
-**Framework**: [Graphiti da Zep](https://github.com/getzep/graphiti) - Grafos de conhecimento temporal para agentes
-
-**Veja**:
-- Pseudocódigo: [03_knowledge_graphs.py](examples/03_knowledge_graphs.py)
-- Pesquisa: [docs/03-knowledge-graphs.md](docs/03-knowledge-graphs.md)
-
----
-
-## 4. Recuperação Contextual
-
-**Status**: ✅ Exemplo de Código (Opcional)
-
-**Arquivo**: `ingestion/contextual_enrichment.py` (Linhas 41-89)
-
-### O que é
-Método da Anthropic: Adiciona contexto em nível de documento a cada chunk antes do embedding. LLM gera 1-2 frases explicando o que o chunk discute em relação ao documento inteiro.
-
-### Vantagens e Desvantagens
-✅ 35-49% de redução em falhas de recuperação, chunks são auto-contidos
-
-❌ Caro (1 chamada LLM por chunk), ingestão mais lenta
-
-### Exemplo Antes/Depois
-```
-ANTES:
-"Dados limpos são essenciais. Remover duplicatas, lidar com valores ausentes..."
-
-DEPOIS:
-"Este chunk de 'Melhores Práticas de ML' discute técnicas de preparação de dados
-para fluxos de trabalho de aprendizado de máquina.
-
-Dados limpos são essenciais. Remover duplicatas, lidar com valores ausentes..."
-```
-
-### Exemplo de Código
-```python
-# Linhas 41-89 em contextual_enrichment.py
-async def enriquecer_chunk(chunk: str, documento: str, titulo: str) -> str:
-    """Adicionar prefixo contextual a um chunk."""
-    prompt = f"""<documento>
-Título: {titulo}
-{documento[:4000]}
-</documento>
-
-<chunk>
-{chunk}
-</chunk>
-
-Forneça contexto breve explicando o que este chunk discute.
-Formato: "Este chunk de [título] discute [explicação]." """
-
-    resposta = await client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0,
-        max_tokens=150
-    )
-
-    contexto = resposta.choices[0].message.content.strip()
-    return f"{contexto}\n\n{chunk}"
-```
-
-**Habilitar com**: `python -m ingestion.ingest --documents ./docs --contextual`
-
-**Veja**:
-- Guia completo: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#7-contextual-retrieval)
-- Pseudocódigo: [04_contextual_retrieval.py](examples/04_contextual_retrieval.py)
-- Pesquisa: [docs/04-contextual-retrieval.md](docs/04-contextual-retrieval.md)
-
----
-
-## 5. Expansão de Consulta
-
-**Status**: ✅ Exemplo de Código
-
-**Arquivo**: `rag_agent_advanced.py` (Linhas 72-107)
-
-### O que é
-Expande uma consulta breve única em uma versão mais detalhada e abrangente, adicionando contexto, termos relacionados e esclarecendo intenção. Usa um LLM com prompt de sistema que descreve como enriquecer a consulta mantendo a intenção original.
-
-**Exemplo:**
-- **Entrada:** "O que é RAG?"
-- **Saída:** "O que é Retrieval-Augmented Generation (RAG), como combina recuperação de informações com geração de linguagem, quais são seus componentes principais e arquitetura, e que vantagens fornece para sistemas de pergunta-resposta?"
-
-### Vantagens e Desvantagens
-✅ Precisão de recuperação melhorada ao adicionar contexto relevante e especificidade
-
-❌ Chamada extra de LLM adiciona latência, pode sobre-especificar consultas simples
-
-### Exemplo de Código
-```python
-# Expansão de consulta usando prompt de sistema para guiar o enriquecimento
-async def expandir_consulta(ctx: RunContext[None], consulta: str) -> str:
-    """Expandir consulta breve em versão mais detalhada e abrangente."""
-    prompt_sistema = """Você é um assistente de expansão de consulta. Pegue consultas breves de usuários e expanda-as em versões mais detalhadas e abrangentes que:
-1. Adicionam contexto relevante e esclarecimentos
-2. Incluem terminologia relacionada e conceitos
-3. Especificam quais aspectos devem ser cobertos
-4. Mantêm a intenção original
-5. Mantêm como uma única pergunta coerente
-
-Expanda a consulta para ser 2-3x mais detalhada mantendo o foco."""
-
-    resposta = await client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": prompt_sistema},
-            {"role": "user", "content": f"Expanda esta consulta: {consulta}"}
-        ],
-        temperature=0.3
-    )
-
-    consulta_expandida = resposta.choices[0].message.content.strip()
-    return consulta_expandida  # Retorna UMA consulta aprimorada
-```
-
-**Nota**: Esta estratégia retorna UMA consulta enriquecida. Para gerar múltiplas variações de consulta, veja RAG Multi-Consulta (Estratégia 6).
-
-**Veja**:
-- Guia completo: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#2-query-expansion)
-- Pseudocódigo: [05_query_expansion.py](examples/05_query_expansion.py)
-- Pesquisa: [docs/05-query-expansion.md](docs/05-query-expansion.md)
-
----
-
-## 6. Multi-Query RAG
-
-**Status**: ✅ Code Example
-
-**File**: `rag_agent_advanced.py` (Lines 114-187)
-
-### What It Is
-Generates multiple different query variations/perspectives with an LLM (e.g., 3-4 variations), runs all searches concurrently, and deduplicates results. Unlike Query Expansion which enriches ONE query, this creates MULTIPLE distinct phrasings to capture different angles.
-
-### Pros & Cons
-✅ Comprehensive coverage, better recall on ambiguous queries
-
-❌ 4x database queries (though parallelized), higher cost
-
-### Code Example
-```python
-# Lines 114-187 in rag_agent_advanced.py
-async def search_with_multi_query(query: str, limit: int = 5) -> str:
-    """Search using multiple query variations in parallel."""
-    # Generate variations
-    queries = await expand_query_variations(query)  # Returns 4 queries
-
-    # Execute all searches in parallel
-    search_tasks = []
-    for q in queries:
-        query_embedding = await embedder.embed_query(q)
-        task = db.fetch("SELECT * FROM match_chunks($1::vector, $2)", query_embedding, limit)
-        search_tasks.append(task)
-
-    results_lists = await asyncio.gather(*search_tasks)
-
-    # Deduplicate by chunk ID, keep highest similarity
-    seen = {}
-    for results in results_lists:
-        for row in results:
-            if row['chunk_id'] not in seen or row['similarity'] > seen[row['chunk_id']]['similarity']:
-                seen[row['chunk_id']] = row
-
-    return format_results(sorted(seen.values(), key=lambda x: x['similarity'], reverse=True)[:limit])
-```
-
-**Key Features**:
-- Parallel execution with `asyncio.gather()`
-- Smart deduplication (keeps best score per chunk)
-
-**See**:
-- Full guide: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#3-multi-query-rag)
-- Pseudocode: [06_multi_query_rag.py](examples/06_multi_query_rag.py)
-- Research: [docs/06-multi-query-rag.md](docs/06-multi-query-rag.md)
-
----
-
-## 7. Context-Aware Chunking
-
-**Status**: ✅ Code Example (Default)
-
-**File**: `ingestion/chunker.py` (Lines 70-102)
-
-### What It Is
-Intelligent document splitting that uses semantic similarity and document structure analysis to find natural chunk boundaries, rather than naive fixed-size splitting. This approach:
-- Analyzes document structure (headings, sections, paragraphs, tables)
-- Uses semantic analysis to identify topic boundaries
-- Respects linguistic coherence within chunks
-- Preserves hierarchical context (e.g., heading information)
-
-**Implementation Example**: Docling's HybridChunker demonstrates this strategy through:
-- Token-aware chunking (uses actual tokenizer, not estimates)
-- Document structure preservation
-- Semantic coherence
-- Heading context inclusion
-
-### Pros & Cons
-✅ Free, fast, maintains document structure
-
-❌ Slightly more complex than naive chunking
-
-### Code Example
-```python
-# Lines 70-102 in chunker.py
+# Linhas 70–102 em chunker.py
 from docling.chunking import HybridChunker
 from transformers import AutoTokenizer
 
 class DoclingHybridChunker:
     def __init__(self, config: ChunkingConfig):
-        # Initialize tokenizer for token-aware chunking
+        # Inicializa tokenizador para chunking sensível ao token
         self.tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
 
-        # Create HybridChunker
+        # Cria HybridChunker
         self.chunker = HybridChunker(
             tokenizer=self.tokenizer,
             max_tokens=config.max_tokens,
-            merge_peers=True  # Merge small adjacent chunks
+            merge_peers=True  # Mescla chunks pequenos adjacentes
         )
 
     async def chunk_document(self, docling_doc: DoclingDocument) -> List[DocumentChunk]:
-        # Use HybridChunker to chunk the DoclingDocument
+        # Utiliza HybridChunker para dividir o DoclingDocument
         chunks = list(self.chunker.chunk(dl_doc=docling_doc))
 
-        # Contextualize each chunk (includes heading hierarchy)
+        # Contextualiza cada chunk (inclui hierarquia dos títulos)
         for chunk in chunks:
-            contextualized_text = self.chunker.contextualize(chunk=chunk)
-            # Store contextualized text as chunk content
+            texto_contextualizado = self.chunker.contextualize(chunk=chunk)
+            # Armazena texto contextualizado no chunk
 ```
 
-**Enabled by default during ingestion**
+**Ativado por padrão durante a ingestão**
 
-**See**:
-- Full guide: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#1-context-aware-chunking)
-- Pseudocode: [07_context_aware_chunking.py](examples/07_context_aware_chunking.py)
-- Research: [docs/07-context-aware-chunking.md](docs/07-context-aware-chunking.md)
+**Veja:**
+- Guia completo: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#1-context-aware-chunking)
+- Pseudocódigo: [07_context_aware_chunking.py](examples/07_context_aware_chunking.py)
+- Pesquisa: [docs/07-context-aware-chunking.md](docs/07-context-aware-chunking.md)
 
 ---
 
 ## 8. Late Chunking
 
-**Status**: 📝 Pseudocode Only
+**Status**: 📝 Apenas Pseudocódigo
 
-**Why not in code examples**: Docling HybridChunker provides similar benefits
+**Por que não está nos exemplos de código**: O HybridChunker do Docling já supre boa parte dos benefícios
 
-### What It Is
-Embed the full document through transformer first, then chunk the token embeddings (not the text). Preserves full document context in each chunk's embedding.
+### O que é
+Faz o embedding do documento inteiro utilizando transformer, depois realiza o chunking sobre as embeddings (não sobre o texto). Assim, cada chunk possui contexto total do documento em sua embedding.
 
-### Pros & Cons
-✅ Maintains full document context, leverages long-context models
+### Vantagens e Desvantagens
+✅ Preserva contexto total do documento, aproveita modelos com janelas longas
 
-❌ More complex than standard chunking
+❌ Mais complexo que chunking tradicional
 
-### Pseudocode Concept
+### Conceito em Pseudocódigo
 ```python
-# From 08_late_chunking.py
-def late_chunk(text: str, chunk_size=512) -> list:
-    """Process full document through transformer BEFORE chunking."""
-    # Step 1: Embed entire document (up to 8192 tokens)
-    full_doc_token_embeddings = transformer_embed(text)  # Token-level embeddings
+# De 08_late_chunking.py
+def late_chunk(texto: str, tamanho_chunk=512):
+    """Processa documento completo no transformer ANTES de chunkear."""
+    # Passo 1: Embedding do documento inteiro (até 8192 tokens)
+    embeddings_tokens = transformer_embed(texto)
 
-    # Step 2: Define chunk boundaries
-    tokens = text.split()
-    chunk_boundaries = range(0, len(tokens), chunk_size)
+    # Passo 2: Definir limites dos chunks
+    tokens = texto.split()
+    limites = range(0, len(tokens), tamanho_chunk)
 
-    # Step 3: Pool token embeddings for each chunk
-    chunks_with_embeddings = []
-    for start in chunk_boundaries:
-        end = start + chunk_size
-        chunk_text = ' '.join(tokens[start:end])
-
-        # Mean pool the token embeddings (preserves full doc context!)
-        chunk_embedding = mean_pool(full_doc_token_embeddings[start:end])
-        chunks_with_embeddings.append((chunk_text, chunk_embedding))
-
-    return chunks_with_embeddings
+    # Passo 3: Pooling das embeddings para cada chunk
+    chunks_emb = []
+    for inicio in limites:
+        fim = inicio + tamanho_chunk
+        chunk_text = ' '.join(tokens[inicio:fim])
+        embedding = mean_pool(embeddings_tokens[inicio:fim])
+        chunks_emb.append((chunk_text, embedding))
+    return chunks_emb
 ```
-
-**Alternative**: Use Context-Aware Chunking (Docling) + Contextual Retrieval for similar benefits
-
-**See**:
-- Pseudocode: [08_late_chunking.py](examples/08_late_chunking.py)
-- Research: [docs/08-late-chunking.md](docs/08-late-chunking.md)
 
 ---
 
-## 9. Hierarchical RAG
+## 9. RAG Hierárquico
 
-**Status**: 📝 Pseudocode Only
+**Status**: 📝 Apenas Pseudocódigo
 
-**Why not in code examples**: Agentic RAG achieves similar goals for this demo
+**Por que não está nos exemplos de código**: O RAG Agêntico supre objetivo similar nesta demo
 
-### What It Is
-Parent-child chunk relationships: Search small chunks for precision, return large parent chunks for context.
+### O que é
+Relaciona chunks pequenos ("filhos") para busca precisa, com chunks grandes ("pais") para contexto adicional. Permite armazenar metadados como tipo de seção e caminho de títulos.
 
-**Metadata Enhancement**: Can store metadata like `section_type` ("summary", "table", "detail") and `heading_path` to intelligently decide when to return just the child vs. the parent, or to include heading context.
+### Vantagens e Desvantagens
+✅ Equilibra precisão (busca no "filho") e contexto (retorna o "pai")
 
-### Pros & Cons
-✅ Balances precision (search small) with context (return big)
+❌ Requer modelagem pai-filho no banco
 
-❌ Requires parent-child database schema
-
-### Pseudocode Concept
+### Conceito em Pseudocódigo
 ```python
-# From 09_hierarchical_rag.py
-def ingest_hierarchical(document: str, doc_title: str):
-    """Create parent-child chunk structure with simple metadata."""
-    parent_chunks = [document[i:i+2000] for i in range(0, len(document), 2000)]
-
-    for parent_id, parent in enumerate(parent_chunks):
-        # Store parent with metadata (section type, heading)
-        metadata = {"heading": f"{doc_title} - Section {parent_id}", "type": "detail"}
+# De 09_hierarchical_rag.py
+def ingest_hierarchical(documento: str, titulo: str):
+    pais = [documento[i:i+2000] for i in range(0, len(documento), 2000)]
+    for id_pai, pai in enumerate(pais):
+        metadata = {"heading": f"{titulo} - Seção {id_pai}", "type": "detail"}
         db.execute("INSERT INTO parent_chunks (id, content, metadata) VALUES (%s, %s, %s)",
-                   (parent_id, parent, metadata))
-
-        # Children: Small chunks with parent_id
-        child_chunks = [parent[j:j+500] for j in range(0, len(parent), 500)]
-        for child in child_chunks:
-            embedding = get_embedding(child)
+                   (id_pai, pai, metadata))
+        filhos = [pai[j:j+500] for j in range(0, len(pai), 500)]
+        for filho in filhos:
+            embedding = get_embedding(filho)
             db.execute(
                 "INSERT INTO child_chunks (content, embedding, parent_id) VALUES (%s, %s, %s)",
-                (child, embedding, parent_id)
+                (filho, embedding, id_pai)
             )
 
 @agent.tool
-def hierarchical_search(query: str) -> str:
-    """Search children, return parents with heading context."""
-    query_emb = get_embedding(query)
-
-    # Find matching children and their parent metadata
-    results = db.query(
+def busca_hierarquica(consulta: str) -> str:
+    emb_consulta = get_embedding(consulta)
+    resultados = db.query(
         """SELECT p.content, p.metadata
            FROM child_chunks c
            JOIN parent_chunks p ON c.parent_id = p.id
            ORDER BY c.embedding <=> %s LIMIT 3""",
-        query_emb
+        emb_consulta
     )
-
-    # Return parents with heading context
-    return "\n\n".join([f"[{r['metadata']['heading']}]\n{r['content']}" for r in results])
+    return "\n\n".join([f"[{r['metadata']['heading']}]\n{r['content']}" for r in resultados])
 ```
-
-**Alternative**: Use Agentic RAG (semantic search + full document retrieval) for similar flexibility
-
-**See**:
-- Pseudocode: [09_hierarchical_rag.py](examples/09_hierarchical_rag.py)
-- Research: [docs/09-hierarchical-rag.md](docs/09-hierarchical-rag.md)
 
 ---
 
-## 10. Self-Reflective RAG
+## 10. RAG Auto-reflexivo
 
-**Status**: ✅ Code Example
+**Status**: ✅ Exemplo de Código
 
-**File**: `rag_agent_advanced.py` (Lines 361-482)
+**Arquivo**: `rag_agent_advanced.py` (Linhas 361–482)
 
-### What It Is
-Self-correcting search loop:
-1. Perform initial search
-2. LLM grades relevance (1-5 scale)
-3. If score < 3, refine query and search again
+### O que é
+Loop de busca autocorretiva:
+1. Realiza busca inicial
+2. LLM avalia a relevância (1–5)
+3. Se baixa, refina a consulta e busca novamente
 
-### Pros & Cons
-✅ Self-correcting, improves over time
+### Vantagens e Desvantagens
+✅ Autocorretivo, melhora com o tempo
 
-❌ Highest latency (2-3 LLM calls), most expensive
+❌ Alta latência (2–3 chamadas ao LLM), mais caro
 
-### Code Example
+### Exemplo de Código
+
 ```python
-# Lines 361-482 in rag_agent_advanced.py
-async def search_with_self_reflection(query: str, limit: int = 5) -> str:
-    """Self-reflective search: evaluate and refine if needed."""
-    # Initial search
-    results = await vector_search(query, limit)
+# Linhas 361–482 em rag_agent_advanced.py
+async def busca_com_autorreflexao(consulta: str, limite: int = 5) -> str:
+    # Busca inicial
+    resultados = await busca_vetorial(consulta, limite)
+    # Avaliar relevância
+    prompt_avaliacao = f"""Consulta: {consulta}
+Resultados recuperados: {resultados[:200]}...
 
-    # Grade relevance
-    grade_prompt = f"""Query: {query}
-Retrieved: {results[:200]}...
-
-Grade relevance 1-5. Respond with number only."""
-
-    grade_response = await client.chat.completions.create(
+Dê uma nota de relevância de 1 a 5. Responda apenas com o número."""
+    resposta = await client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": grade_prompt}],
+        messages=[{"role": "user", "content": prompt_avaliacao}],
         temperature=0
     )
-    grade_score = int(grade_response.choices[0].message.content.split()[0])
+    nota = int(resposta.choices[0].message.content.split()[0])
 
-    # If low relevance, refine and re-search
-    if grade_score < 3:
-        refine_prompt = f"""Query "{query}" returned low-relevance results.
-Suggest improved query. Respond with query only."""
+    # Se relevância for baixa, refina e faz nova busca
+    if nota < 3:
+        prompt_refino = f"""A consulta "{consulta}" retornou resultados de baixa relevância.
+Sugira uma consulta aprimorada. Responda apenas com a nova consulta."""
+        resposta_refino = await client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt_refino}],
+            temperature=0.2
+        )
+        consulta_refinada = resposta_refino.choices[0].message.content.strip()
+        resultados = await busca_vetorial(consulta_refinada, limite)
+        nota_extra = f"[Consulta refeita de '{consulta}' para '{consulta_refinada}']"
+    else:
+        nota_extra = ""
 
-        refined_query = await client.chat.completions.create(...)
-        results = await vector_search(refined_query, limit)
-        note = f"[Refined from '{query}' to '{refined_query}']"
-
-    return format_results(results, note)
+    return formatar_resultados(resultados, nota_extra)
 ```
 
-**See**:
-- Full guide: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#6-self-reflective-rag)
-- Pseudocode: [10_self_reflective_rag.py](examples/10_self_reflective_rag.py)
-- Research: [docs/10-self-reflective-rag.md](docs/10-self-reflective-rag.md)
+**Veja:**
+- Guia completo: [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md#6-self-reflective-rag)
+- Pseudocódigo: [10_self_reflective_rag.py](examples/10_self_reflective_rag.py)
+- Pesquisa: [docs/10-self-reflective-rag.md](docs/10-self-reflective-rag.md)
 
 ---
 
-## 11. Fine-tuned Embeddings
+## 11. Embeddings Fine-tuned
 
-**Status**: 📝 Pseudocode Only
+**Status**: 📝 Apenas Pseudocódigo
 
-**Why not in code examples**: Requires domain-specific training data and infrastructure
+**Por que não está nos exemplos de código**: Exige dados de treinamento específicos do domínio e infraestrutura extra.
 
-### What It Is
-Train embedding models on domain-specific query-document pairs to improve retrieval accuracy for specialized domains (medical, legal, financial, etc.).
+### O que é
+Treine modelos de embedding com pares de consulta-documento específicos do domínio para melhorar a precisão da recuperação em áreas especializadas (ex.: medicina, jurídico, finanças, etc.).
 
-### Pros & Cons
-✅ 5-10% accuracy gains, smaller models can outperform larger generic ones
+### Vantagens e Desvantagens
+✅ Ganho de 5–10% em precisão; modelos pequenos podem superar modelos genéricos grandes
 
-❌ Requires training data, infrastructure, ongoing maintenance
+❌ Exige dados de treinamento, infraestrutura e manutenção contínua
 
-### Pseudocode Concept
+### Conceito em Pseudocódigo
 ```python
-# From 11_fine_tuned_embeddings.py
+# De 11_fine_tuned_embeddings.py
 from sentence_transformers import SentenceTransformer
 
-def prepare_training_data():
-    """Create domain-specific query-document pairs."""
+def preparar_dados_treinamento():
+    """Cria pares de consulta-documento específicos do domínio."""
     return [
-        ("What is EBITDA?", "financial_doc_about_ebitda.txt"),
-        ("Explain capital expenditure", "capex_explanation.txt"),
-        # ... thousands more domain-specific pairs
+        ("O que é EBITDA?", "doc_financeiro_ebitda.txt"),
+        ("Explique despesa de capital", "explicacao_capex.txt"),
+        # ... milhares de pares do domínio
     ]
 
 def fine_tune_model():
-    """Fine-tune on domain data (one-time process)."""
+    """Ajusta modelo com dados do domínio (única vez)."""
     base_model = SentenceTransformer('all-MiniLM-L6-v2')
-    training_data = prepare_training_data()
-
-    # Train with MultipleNegativesRankingLoss
+    dados_treinamento = preparar_dados_treinamento()
     fine_tuned_model = base_model.fit(
-        training_data,
+        dados_treinamento,
         epochs=3,
         loss=MultipleNegativesRankingLoss()
     )
-
     fine_tuned_model.save('./fine_tuned_model')
 
-# Load fine-tuned model for embeddings
+# Para gerar embeddings
 embedding_model = SentenceTransformer('./fine_tuned_model')
 
-def get_embedding(text: str):
-    """Use fine-tuned model for embeddings."""
-    return embedding_model.encode(text)
+def gerar_embedding(texto: str):
+    """Gera embedding com modelo ajustado."""
+    return embedding_model.encode(texto)
 ```
 
-**Alternative**: Use high-quality generic models (OpenAI text-embedding-3-small) and Contextual Retrieval
-
-**See**:
-- Pseudocode: [11_fine_tuned_embeddings.py](examples/11_fine_tuned_embeddings.py)
-- Research: [docs/11-fine-tuned-embeddings.md](docs/11-fine-tuned-embeddings.md)
+**Veja:**
+- Pseudocódigo: [11_fine_tuned_embeddings.py](examples/11_fine_tuned_embeddings.py)
+- Pesquisa: [docs/11-fine-tuned-embeddings.md](docs/11-fine-tuned-embeddings.md)
 
 ---
 
-## 📊 Performance Comparison
+## 📊 Comparativo de Performance
 
-### Ingestion Strategies
+### Estratégias de Ingestão
 
-| Strategy | Speed | Cost | Quality | Status |
-|----------|-------|------|---------|--------|
-| Simple Chunking | ⚡⚡⚡ | $ | ⭐⭐ | ✅ Available |
-| Context-Aware (Docling) | ⚡⚡ | $ | ⭐⭐⭐⭐ | ✅ Default |
-| Contextual Enrichment | ⚡ | $$$ | ⭐⭐⭐⭐⭐ | ✅ Optional |
-| Late Chunking | ⚡⚡ | $ | ⭐⭐⭐⭐ | 📝 Pseudocode |
-| Hierarchical | ⚡⚡ | $ | ⭐⭐⭐⭐ | 📝 Pseudocode |
+| Estratégia               | Velocidade | Custo | Qualidade | Status         |
+|--------------------------|-----------|-------|-----------|----------------|
+| Chunking Simples         | ⚡⚡⚡      | $     | ⭐⭐        | ✅ Disponível   |
+| Contextual (Docling)     | ⚡⚡       | $     | ⭐⭐⭐⭐      | ✅ Padrão      |
+| Enriquecimento Contextual| ⚡        | $$$   | ⭐⭐⭐⭐⭐     | ✅ Opcional     |
+| Late Chunking            | ⚡⚡       | $     | ⭐⭐⭐⭐      | 📝 Pseudocódigo |
+| Hierárquico              | ⚡⚡       | $     | ⭐⭐⭐⭐      | 📝 Pseudocódigo |
 
-### Query Strategies
+### Estratégias para Consulta
 
-| Strategy | Latency | Cost | Precision | Recall | Status |
-|----------|---------|------|-----------|--------|--------|
-| Standard Search | ⚡⚡⚡ | $ | ⭐⭐⭐ | ⭐⭐⭐ | ✅ Default |
-| Query Expansion | ⚡⚡ | $$ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Multi-Query |
-| Multi-Query | ⚡⚡ | $$ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ Code Example |
-| Re-ranking | ⚡⚡ | $$ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ✅ Code Example |
-| Agentic | ⚡⚡ | $$ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Code Example |
-| Self-Reflective | ⚡ | $$$ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Code Example |
-| Knowledge Graphs | ⚡⚡ | $$$ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 📝 Pseudocode |
+| Estratégia     | Latência | Custo | Precisão | Recall | Status           |
+|----------------|----------|-------|----------|--------|------------------|
+| Busca Padrão   | ⚡⚡⚡     | $     | ⭐⭐⭐     | ⭐⭐⭐   | ✅ Padrão        |
+| Expansão Consulta| ⚡⚡   | $$    | ⭐⭐⭐     | ⭐⭐⭐⭐  | ✅ Multi-Consulta |
+| Multi-Consulta | ⚡⚡      | $$    | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | ✅ Exemplo        |
+| Re-ranking     | ⚡⚡      | $$    | ⭐⭐⭐⭐⭐   | ⭐⭐⭐   | ✅ Exemplo        |
+| Agêntico       | ⚡⚡      | $$    | ⭐⭐⭐⭐    | ⭐⭐⭐⭐  | ✅ Exemplo        |
+| Auto-reflexivo | ⚡       | $$$   | ⭐⭐⭐⭐    | ⭐⭐⭐⭐  | ✅ Exemplo        |
+| Knowledge Graph| ⚡⚡      | $$$   | ⭐⭐⭐⭐⭐   | ⭐⭐⭐⭐  | 📝 Pseudocódigo   |
 
 ---
 
-## 📂 Repository Structure
+## 📂 Estrutura do Repositório
 
 ```
 all-rag-strategies/
-├── README.md                           # This file
-├── docs/                               # Detailed research (theory + use cases)
+├── README.md                           # Este arquivo
+├── docs/                               # Pesquisa detalhada (teoria + casos)
 │   ├── 01-reranking.md
 │   ├── 02-agentic-rag.md
-│   ├── ... (all 11 strategies)
+│   ├── ... (todas as 11 estratégias)
 │   └── 11-fine-tuned-embeddings.md
 │
-├── examples/                           # Simple < 50 line examples
+├── examples/                           # Exemplos simples (< 50 linhas)
 │   ├── 01_reranking.py
 │   ├── 02_agentic_rag.py
-│   ├── ... (all 11 strategies)
+│   ├── ... (todas as 11 estratégias)
 │   ├── 11_fine_tuned_embeddings.py
 │   └── README.md
 │
-└── implementation/                     # Educational code examples (NOT production)
-    ├── rag_agent.py                    # Basic agent (single tool)
-    ├── rag_agent_advanced.py           # Advanced agent (all strategies)
+└── implementation/                     # Exemplos educacionais (NÃO produção)
+    ├── rag_agent.py                    # Agente básico (uma ferramenta)
+    ├── rag_agent_advanced.py           # Agente avançado (todas estratégias)
     ├── ingestion/
-    │   ├── ingest.py                   # Main ingestion pipeline
-    │   ├── chunker.py                  # Docling HybridChunker
-    │   ├── embedder.py                 # OpenAI embeddings
-    │   └── contextual_enrichment.py    # Anthropic's contextual retrieval
+    │   ├── ingest.py                   # Pipeline de ingestão
+    │   ├── chunker.py                  # HybridChunker (Docling)
+    │   ├── embedder.py                 # Embeddings OpenAI
+    │   └── contextual_enrichment.py    # Recuperação contextual Anthropic
     ├── utils/
     │   ├── db_utils.py
     │   └── models.py
-    ├── IMPLEMENTATION_GUIDE.md         # Exact line numbers + code
-    ├── STRATEGIES.md                   # Detailed strategy documentation
+    ├── IMPLEMENTATION_GUIDE.md         # Linhas exatas + código
+    ├── STRATEGIES.md                   # Documentação detalhada
     └── requirements-advanced.txt
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Stack Tecnológico
 
-| Component | Technology | Purpose |
-|-----------|-----------|---------|
-| Agent Framework | [Pydantic AI](https://ai.pydantic.dev/) | Type-safe agents with tool calling |
-| Vector Database | PostgreSQL + [pgvector](https://github.com/pgvector/pgvector) via [Neon](https://neon.tech/) | Vector similarity search (Neon used for demonstrations) |
-| Document Processing | [Docling](https://github.com/DS4SD/docling) | Hybrid chunking + multi-format |
-| Embeddings | OpenAI text-embedding-3-small | 1536-dim embeddings |
-| Re-ranking | sentence-transformers | Cross-encoder for precision |
-| LLM | OpenAI GPT-4o-mini | Query expansion, grading, refinement |
-
----
-
-## 📚 Additional Resources
-
-- **Implementation Details**: [implementation/IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md)
-- **Strategy Theory**: [docs/](docs/) (11 detailed docs)
-- **Code Examples**: [examples/README.md](examples/README.md)
-- **Anthropic's Contextual Retrieval**: https://www.anthropic.com/news/contextual-retrieval
-- **Graphiti (Knowledge Graphs)**: https://github.com/getzep/graphiti
-- **Pydantic AI Docs**: https://ai.pydantic.dev/
+| Componente         | Tecnologia                               | Propósito                            |
+|--------------------|------------------------------------------|--------------------------------------|
+| Framework Agente   | [Pydantic AI](https://ai.pydantic.dev/)  | Agentes tiposafe com uso de ferramentas |
+| Banco Vetorial     | PostgreSQL + [pgvector](https://github.com/pgvector/pgvector) via [Neon](https://neon.tech/) | Busca vetorial (Neon demonstrações) |
+| Processamento Docs | [Docling](https://github.com/DS4SD/docling) | Chunking híbrido e múltiplos formatos|
+| Embeddings         | OpenAI text-embedding-3-small            | 1536-dim embeddings                  |
+| Re-ranking         | sentence-transformers                    | Cross-encoder para precisão           |
+| LLM                | OpenAI GPT-4o-mini                       | Expansão de consultas, avaliação, refino |
 
 ---
 
-## 🤝 Contributing
+## 📚 Recursos Adicionais
 
-This is a demonstration/education project. Feel free to:
-- Fork and adapt for your use case
-- Report issues or suggestions
-- Share your own RAG strategy implementations
+- **Detalhes de implementação**: [implementation/IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md)
+- **Teoria das Estratégias**: [docs/](docs/) (11 docs detalhados)
+- **Exemplos em Código**: [examples/README.md](examples/README.md)
+- **Recuperação Contextual Anthropic**: https://www.anthropic.com/news/contextual-retrieval
+- **Graphiti (Grafos de Conhecimento)**: https://github.com/getzep/graphiti
+- **Documentação Pydantic AI**: https://ai.pydantic.dev/
 
 ---
-
-## 🙏 Acknowledgments
-
-- **Anthropic** - Contextual Retrieval methodology
-- **Docling Team** - HybridChunker implementation
-- **Jina AI** - Late chunking concept
-- **Pydantic Team** - Pydantic AI framework
-- **Zep** - Graphiti knowledge graph framework
-- **Sentence Transformers** - Cross-encoder models
