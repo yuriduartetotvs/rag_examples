@@ -537,12 +537,14 @@ all-rag-strategies/
 ---
 
 ## 📚 Recursos Adicionais
+Execução do projeto
+Primeiro definir os dados do .env
+Depois realize os
+~~~cmd
+uv run python -m ingestion.ingest --documents documents/
 
-- **Detalhes de implementação**: [implementation/IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md)
-- **Teoria das Estratégias**: [docs/](docs/) (11 docs detalhados)
-- **Exemplos em Código**: [examples/README.md](examples/README.md)
-- **Recuperação Contextual Anthropic**: https://www.anthropic.com/news/contextual-retrieval
-- **Graphiti (Grafos de Conhecimento)**: https://github.com/getzep/graphiti
-- **Documentação Pydantic AI**: https://ai.pydantic.dev/
+e
 
+uv run python cli.py
+~~~
 ---
